@@ -1,0 +1,27 @@
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="'/home'">
+    </a>
+    <button  mat-flat-button color="primary" type="button"(click)="btnLogout()">Cerrar sesión</button>
+  </div>
+</nav>
+<div class="container">
+  <div class="conainerDelimite">
+  <div class="containerTittle"> 
+    <h2>Crear Juego</h2>
+  </div>
+ <form id="frmJugadores" [formGroup]="frmJugadores" (ngSubmit)="frmJugadores.valid ? submit() : false">
+      <select name="jugadores" multiple class="jugadores" formControlName="jugadores">
+        <option *ngFor="let jugador of jugadores" [value]="jugador.id">
+          {{ jugador.name }}
+        </option>
+      </select>
+      <br>
+      <div class="error" *ngIf="frmJugadores.get('jugadores')?.hasError('required')">Debes seleccionar por lo menos un
+        jugador</div>
+      <br>
+      <button  mat-raised-button color="primary" type="submit" [disabled]="frmJugadores.invalid">Crear Juego</button>
+    </form>
+  </div>
+</div>
+

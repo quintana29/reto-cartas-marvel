@@ -1,0 +1,22 @@
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="'/home'">
+    </a>
+    <button  mat-flat-button color="primary" type="button"(click)="btnLogout()">Cerrar sesión</button>
+  </div>
+</nav>
+<div class="container">
+  <div><h2>Inicio</h2></div>
+  <div>
+    <h1>Indicaciones De Juego</h1>
+    <p>
+      Para iniciar el juego debes de estar registrado, incluso los 
+      jugadores
+    </p>
+      <a routerLink="/game/new" class="btn btn-primary">Crear Juego</a>
+  </div>
+  <div>
+    <button mat-button color="primary">Invita a tus amigos</button>
+  </div>
+  <a routerLink="/lista/juegos" class="btn btn-primary">Consultar Juegos Creados</a>
+</div>

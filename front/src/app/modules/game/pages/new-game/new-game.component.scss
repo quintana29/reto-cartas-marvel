@@ -1,0 +1,33 @@
+.jugadores {
+  width: 200px;
+
+}
+
+.error {
+  color: red;
+}
+.container{
+  text-align: center;
+  max-width: 50%;
+  margin: auto;
+  position: relative;
+  top: 200px;
+  
+}
+.containerTittle{
+  background:grey;
+  max-width: 100%;
+  position: relative;
+  bottom: 20px;
+  height: 40px;
+}
+
+.conainerDelimite{
+  border: 1px solid;
+}
+@media only screen and (max-width: 600px)  {
+  .jugadores{
+    width: 80%;
+  }
+ 
+}
