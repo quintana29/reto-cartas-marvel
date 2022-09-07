@@ -1,8 +1,15 @@
 .container{
+    background-color: rgba(202, 213, 223, 0.7);
+    
+    border-radius: 30px;
     text-align: center;
     max-width: 50%;
     margin: auto;
+    padding: 30px 30px;
     position: relative;
     top: 200px;
     
+}
+.navbar{
+   background-color: aqua;
 }

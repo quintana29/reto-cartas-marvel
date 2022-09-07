@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/back/application/app-service/app-service.iml" filepath="$PROJECT_DIR$/back/application/app-service/app-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/back/business/business.iml" filepath="$PROJECT_DIR$/back/business/business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/back/domain/domain.iml" filepath="$PROJECT_DIR$/back/domain/domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/back/marvelgame.iml" filepath="$PROJECT_DIR$/back/marvelgame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/reto-cartas-marvel.iml" filepath="$PROJECT_DIR$/.idea/reto-cartas-marvel.iml" />
+    </modules>
+  </component>
+</project>
