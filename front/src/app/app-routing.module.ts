@@ -24,6 +24,10 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToDashboard },
   },
+  {
+    path: 'game',
+    loadChildren: () => import('./game-module/game-module.module').then((m) => m.GameModuleModule),
+  }
  
 ];
 

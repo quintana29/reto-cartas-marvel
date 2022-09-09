@@ -21,6 +21,8 @@ public class Carta implements ValueObject<Carta.Props>, Comparable<Carta> {
         this.url = url;
     }
 
+
+
     @Override
     public Props value() {
         return new Props() {

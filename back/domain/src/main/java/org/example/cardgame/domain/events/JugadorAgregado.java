@@ -19,7 +19,7 @@ public class JugadorAgregado extends DomainEvent {
     }
 
 
-    public JugadorId getJuegoId() {
+    public JugadorId getJugadorId() {
         return identity;
     }
 

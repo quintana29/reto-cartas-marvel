@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/auth/login/service/auth.service';
+import { JuegoService } from '../../services/juego.service.service';
+
+import firebase from 'firebase/compat';
+import { JuegoModel } from '../../models/juego'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-juegos',
@@ -9,12 +14,24 @@ import { AuthService } from 'src/app/auth/login/service/auth.service';
 })
 export class JuegosComponent implements OnInit {
 
-  constructor(private auth$: AuthService) { }
+  currentUser!: firebase.User | null;
+  dataSource: JuegoModel[] = [];
 
-  ngOnInit() {
-  }
+  constructor(private auth$: AuthService,
+    private juego$: JuegoService, private router: Router) { 
+      
+    }
+
+    async ngOnInit() {
+      this.currentUser = await this.auth$.getUserAuth();
+      this.juego$.listarJuegos(this.currentUser!.uid).subscribe(juego => this.dataSource=juego)
+    }
   btnLogout(): void{
     this.auth$.logout();
+  }
+
+  onBoard(){
+    this.router.navigate(['/lista/juegos']);
   }
 
 }

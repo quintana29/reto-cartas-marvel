@@ -5,7 +5,15 @@
     <button  mat-flat-button color="primary" type="button"(click)="btnLogout()">Cerrar sesión</button>
   </div>
 </nav>
-<div class="container">
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let juego of dataSource">
+    <span>Id Del Juego:  {{juego.id}}</span><br>
+    <span>Estado del Juego:   {{juego.iniciado}}</span><br>
+    <span>Cantidad de Jugadores: {{juego.cantidadJugadores}}</span><br>
+    <button (click)="onBoard()" class="btn btn-primary">Entar</button>
+  </li>
+<!--<div class="container">
   <h1>LISTA DE JUEGOS</h1>
   <ul class="list-group">
     <li class="list-group-item">
@@ -27,4 +35,4 @@
       <a routerLink="/tablero" class="btn btn-primary">Entar</a>
     </li>
   </ul> 
-</div>
+</div>-->
