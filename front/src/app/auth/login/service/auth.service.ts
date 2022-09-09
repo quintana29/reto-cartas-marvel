@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import { JugadoresService } from '../../game/services/jugadores.service';
+import { JugadoresService } from '../../../game-module/game/services/jugadores.service';
 
 
 @Injectable({

@@ -11,27 +11,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './templates/cards/app.component';
 
 // Components
-import { NewGameComponent } from './modules/game/pages/new-game/new-game.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './modules/game/pages/login/login.component';
-import { HomeComponent } from './modules/game/pages/home/home.component';
 
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import { JuegosComponent } from './modules/game/pages/juegos/juegos.component';
-import { TableroComponent } from './modules/game/pages/tablero/tablero.component';
 import { environment } from 'src/environments/environment';
+import { GameModuleModule } from './game-module/game-module.module';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NewGameComponent,
-    LoginComponent,
-    HomeComponent,
-    JuegosComponent,
-    TableroComponent
+    AppComponent
+
   ],
   imports: [
     BrowserModule,
@@ -39,11 +29,10 @@ import { environment } from 'src/environments/environment';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatToolbarModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    GameModuleModule
 
   ],
   providers: [],

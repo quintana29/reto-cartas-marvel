@@ -8,6 +8,7 @@ import{AngularFirestore, AngularFirestoreCollection
 } from '@angular/fire/compat/firestore'
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -58,4 +59,6 @@ export class JugadoresService {
     }
    
   }
+
+ 
 }

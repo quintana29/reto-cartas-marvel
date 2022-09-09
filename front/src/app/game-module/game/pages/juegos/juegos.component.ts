@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from 'src/app/modules/shared/services/auth.service';
+import { AuthService } from 'src/app/auth/login/service/auth.service';
 
 @Component({
   selector: 'app-juegos',

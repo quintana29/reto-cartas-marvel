@@ -127,16 +127,6 @@ public class GameMaterializeHandle {
 
         template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
     }
-
-    @EventListener
-    public void handleRondaIniciada(RondaIniciada event){
-        var data = new Update();
-        data.set("fecha", Instant.now());
-        data.set("tablero.habilitado", true);
-
-        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
-    }
-
     @EventListener
     public void handleJuegoFinalizado(JuegoFinalizado event){
         var data = new Update();
@@ -147,6 +137,16 @@ public class GameMaterializeHandle {
 
         template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
     }
+
+    @EventListener
+    public void handleRondaIniciada(RondaIniciada event){
+        var data = new Update();
+        data.set("fecha", Instant.now());
+        data.set("tablero.habilitado", true);
+
+        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
+    }
+
 
 
     private Query getFilterByAggregateId(DomainEvent event) {
