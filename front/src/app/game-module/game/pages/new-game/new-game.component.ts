@@ -52,13 +52,13 @@ export class NewGameComponent implements OnInit, OnDestroy {
       complete: () => console.log('completado'),
     });
   }
-
+/* 
   public submit(): void {
     const gamers = this.frmJugadores.getRawValue();
     gamers.jugadores.push(this.currentUser?.uid);
     console.log('Submit', gamers.jugadores.id);
   }
-
+ */
   private createFormJugadores(): FormGroup {
     return new FormGroup({
       jugadores: new FormControl(null, [Validators.required]),
@@ -69,7 +69,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
     this.auth$.logout();
   }
 
-  enviarJugador() {
+  submit() {
     const listJugadores = this.frmJugadores.getRawValue();
     console.log(listJugadores)
     listJugadores.jugadores.push([this.currentUser!.uid,this.currentUser!.displayName])
@@ -83,8 +83,16 @@ export class NewGameComponent implements OnInit, OnDestroy {
       jugadores,
       jugadorPrincipalId: this.currentUser?.uid,
     };
-    this.juego$.crearJuego(juego).subscribe((event) => console.log(event));
+    console.log("sss",juego)
+    this.juego$.crearJuego(juego).subscribe(/* 
+      this.websocket$.conexion(this.uuid).subscribe({
+      next: (event:any) => {
+        if (event.type === 'cardgame.tiempocambiadodeltablero') {
+       
+        }     
+      }
+  }*/);
+     setTimeout(()=>this.router.navigate(['/lista/juegos']),600) 
 
-    this.router.navigate(['/lista/juegos']);
   }
 }

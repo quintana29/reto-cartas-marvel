@@ -30,13 +30,18 @@ public class MazoViewModel {
         private  Boolean estaOculta;
         private  Boolean estaHabilitada;
         private  Integer poder;
+
         private String url;
-        public String getUrl() {
-            return url;
-        }
+
         public void setUrl(String url) {
             this.url = url;
         }
+
+        public String getUrl() {
+            return url;
+        }
+
+
 
         public String getCartaId() {
             return cartaId;

@@ -43,3 +43,5 @@ public class CrearRondaUseCase extends UseCaseForCommand<CrearRondaCommand> {
                 }));
     }
 }
+
+//alimentar la factoria del agregado root por que ahi estan los eventos

@@ -16,56 +16,51 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
 import java.util.Set;
-
-
 import static org.mockito.Mockito.when;
 
+
+//TODO: hacer prueba
 @ExtendWith(MockitoExtension.class)
 class CrearRondaUseCaseTest {
+    @InjectMocks
+    private CrearRondaUseCase useCase;
 
     @Mock
     private JuegoDomainEventRepository repository;
 
-    @InjectMocks
-    private CrearRondaUseCase useCase;
-
     @Test
     void crearRonda(){
+        //ARRANGE
         var command = new CrearRondaCommand();
-        command.setJuegoId("XXX");
-        command.setJugadores(Set.of("AAA","BBB"));
-        command.setTiempo(30);
+        command.setJuegoId("XXXX");
+        command.setTiempo(60);
+        command.setJugadores(Set.of("FFFF", "GGGG", "HHHH"));
 
-        when(repository.obtenerEventosPor("XXX")).thenReturn(history());
+        when(repository.obtenerEventosPor("XXXX"))
+                .thenReturn(juegoCreado());
 
-        StepVerifier.create(useCase.apply(Mono.just(command)))
-                .expectNextMatches(
-                        domainEvent -> {
-                            var event = (RondaCreada) domainEvent;
-                            return "XXX".equals(event.aggregateRootId())
-                                    && event.getTiempo().equals(30)
-                                    && event.getRonda().value().jugadores().equals(
-                                    Set.of(JugadorId.of("AAA"),JugadorId.of("BBB"))
-                            );
-                        }
-                )
+        //ASSERT & ACT
+        StepVerifier
+                .create(useCase.apply(Mono.just(command)))
+                .expectNextMatches(domainEvent -> {
+                    var event = (RondaCreada) domainEvent;
+                    return event.aggregateRootId().equals("XXXX")
+                            && event.getTiempo().equals(60)
+                            && event.getRonda().value().jugadores()
+                            .equals(Set.of(JugadorId.of("FFFF"), JugadorId.of("GGGG"), JugadorId.of("HHHH")));
+                })
                 .expectComplete()
                 .verify();
-
     }
 
-    private Flux<DomainEvent> history() {
-        return Flux.just(
-                new JuegoCreado(JugadorId.of("XXX")),
-                new TableroCreado( TableroId.of("111"),
-                        Set.of(JugadorId.of("111"),JugadorId.of("222"))
+    private Flux<DomainEvent> juegoCreado() {
+        var event = new JuegoCreado(JugadorId.of("FFFF"));
+        event.setAggregateRootId("XXXX");
 
-                )
-        );
+        var event2 = new TableroCreado(TableroId.of("LLLL"), Set.of(JugadorId.of("FFFF"), JugadorId.of("GGGG"), JugadorId.of("HHHH")));
+        event2.setAggregateRootId("XXXX");
 
+        return Flux.just(event, event2);
     }
-
-
 }

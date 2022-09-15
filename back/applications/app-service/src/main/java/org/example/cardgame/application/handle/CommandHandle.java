@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Mono;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
@@ -25,17 +24,14 @@ public class CommandHandle {
 
     @Bean
     public RouterFunction<ServerResponse> crear(CrearJuegoUseCase usecase) {
-
         return route(
                 POST("/juego/crear").and(accept(MediaType.APPLICATION_JSON)),
                 request -> usecase.andThen(integrationHandle)
                         .apply(request.bodyToMono(CrearJuegoCommand.class))
                         .then(ServerResponse.ok().build())
                         .onErrorResume(errorHandler::badRequest)
-
         );
     }
-
 
     @Bean
     public RouterFunction<ServerResponse> iniciar(IniciarJuegoUseCase usecase) {
@@ -45,7 +41,6 @@ public class CommandHandle {
                         .apply(request.bodyToMono(IniciarJuegoCommand.class))
                         .then(ServerResponse.ok().build())
                         .onErrorResume(errorHandler::badRequest)
-
         );
     }
 
@@ -57,10 +52,8 @@ public class CommandHandle {
                         .apply(request.bodyToMono(IniciarRondaCommand.class))
                         .then(ServerResponse.ok().build())
                         .onErrorResume(errorHandler::badRequest)
-
         );
     }
-
 
     @Bean
     public RouterFunction<ServerResponse> poner(PonerCartaEnTableroUseCase usecase) {
@@ -70,7 +63,6 @@ public class CommandHandle {
                         .apply(request.bodyToMono(PonerCartaEnTablero.class))
                         .then(ServerResponse.ok().build())
                         .onErrorResume(errorHandler::badRequest)
-
         );
     }
 
@@ -86,5 +78,4 @@ public class CommandHandle {
 
         );
     }
-
 }

@@ -18,6 +18,7 @@ import { GameModuleModule } from './game-module/game-module.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -33,6 +34,8 @@ import { GameModuleModule } from './game-module/game-module.module';
     AngularFireAuthModule,
     HttpClientModule,
     GameModuleModule
+
+    
 
   ],
   providers: [],

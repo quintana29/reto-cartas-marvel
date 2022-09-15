@@ -4,15 +4,28 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-
+/**
+ * The type Carta.
+ */
 public class Carta implements ValueObject<Carta.Props>, Comparable<Carta> {
 
     private final CartaMaestraId cartaId;
     private final Boolean estaOculta;
     private final Boolean estaHabilitada;
     private final Integer poder;
+
     private final String url;
 
+
+    /**
+     * Instantiates a new Carta.
+     *
+     * @param cartaId        the carta id
+     * @param poder          the poder
+     * @param estaOculta     the esta oculta
+     * @param estaHabilitada the esta habilitada
+     * @param url
+     */
     public Carta(CartaMaestraId cartaId, Integer poder, Boolean estaOculta, Boolean estaHabilitada, String url) {
         this.cartaId = cartaId;
         this.estaOculta = estaOculta;
@@ -20,8 +33,6 @@ public class Carta implements ValueObject<Carta.Props>, Comparable<Carta> {
         this.poder = poder;
         this.url = url;
     }
-
-
 
     @Override
     public Props value() {
@@ -46,9 +57,7 @@ public class Carta implements ValueObject<Carta.Props>, Comparable<Carta> {
                 return estaHabilitada;
             }
             @Override
-            public String url() {
-                return url;
-            }
+            public String url() {return url;}
         };
     }
 
@@ -71,18 +80,36 @@ public class Carta implements ValueObject<Carta.Props>, Comparable<Carta> {
     }
 
 
-
+    /**
+     * The interface Props.
+     */
     public interface Props {
-
+        /**
+         * Carta id carta maestra id.
+         *
+         * @return the carta maestra id
+         */
         CartaMaestraId cartaId();
 
-
+        /**
+         * Poder integer.
+         *
+         * @return the integer
+         */
         Integer poder();
 
-
+        /**
+         * Esta oculta boolean.
+         *
+         * @return the boolean
+         */
         Boolean estaOculta();
 
-
+        /**
+         * Esta habilitada boolean.
+         *
+         * @return the boolean
+         */
         Boolean estaHabilitada();
 
         String url();

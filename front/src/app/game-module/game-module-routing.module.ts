@@ -1,7 +1,6 @@
 // Libraries
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '../auth/login/login.component';
 import { HomeComponent } from './game/pages/home/home.component';
 import { NewGameComponent } from './game/pages/new-game/new-game.component';
 import { JuegosComponent } from './game/pages/juegos/juegos.component';
@@ -23,12 +22,6 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
 
   {
-    path: '',
-    component: LoginComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToDashboard },
-  },
-  {
     path: 'home',
     component: HomeComponent,
     canActivate: [AngularFireAuthGuard],
@@ -47,7 +40,7 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
   {
-    path:'tablero',
+    path:'tablero/:gameId',
     component: TableroComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },

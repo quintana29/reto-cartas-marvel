@@ -34,6 +34,8 @@ async getUserAuth() {
  private OAuthProvider(provider: AuthProvider) {
   return this.afAuth.signInWithPopup(provider)
       .then((res) => {
+        localStorage.setItem('user', JSON.stringify(res.user));
+        JSON.parse(localStorage.getItem('user')!)
           this.gamers$.addGamer(res.user);
           this.ngZone.run(() => {
               this.router.navigate(['home']);
@@ -41,6 +43,9 @@ async getUserAuth() {
       }).catch((error) => {
           window.alert(error)
       })
+}
+obtenerUsuarioSesion() {
+    return JSON.parse(localStorage.getItem('user')!)
 }
 
 logout(): void {

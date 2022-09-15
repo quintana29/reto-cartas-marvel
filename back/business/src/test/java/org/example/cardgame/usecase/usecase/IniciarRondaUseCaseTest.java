@@ -2,6 +2,7 @@ package org.example.cardgame.usecase.usecase;
 
 import co.com.sofka.domain.generic.DomainEvent;
 import org.example.cardgame.domain.command.IniciarRondaCommand;
+import org.example.cardgame.domain.events.JuegoCreado;
 import org.example.cardgame.domain.events.RondaCreada;
 import org.example.cardgame.domain.events.RondaIniciada;
 import org.example.cardgame.domain.events.TableroCreado;
@@ -22,40 +23,58 @@ import java.util.Set;
 
 import static org.mockito.Mockito.when;
 
+
+//TODO: hacer prueba
 @ExtendWith(MockitoExtension.class)
 class IniciarRondaUseCaseTest {
-
-    @Mock
-    private JuegoDomainEventRepository repository;
-
     @InjectMocks
     private IniciarRondaUseCase useCase;
 
+    @Mock
+    private JuegoDomainEventRepository repository;
     @Test
-    void iniciarRondaTest(){
+    void iniciarRonda(){
+        //ASSERT
         var command = new IniciarRondaCommand();
-        command.setJuegoId("AAA");
+        command.setJuegoId("XXXX");
 
-        when(repository.obtenerEventosPor("AAA")).thenReturn(history());
+        when(repository.obtenerEventosPor("XXXX"))
+                .thenReturn(juegoCreado());
 
-        StepVerifier.create(useCase.apply(Mono.just(command)))
-                .expectNextMatches( domainEvent -> {
+        //ACT & ASSERT
+        StepVerifier
+                .create(useCase.apply(Mono.just(command)))
+                .expectNextMatches(domainEvent -> {
                     var event = (RondaIniciada) domainEvent;
-                    return "AAA".equals(event.aggregateRootId());
-                }).expectComplete()
+                    return event.aggregateRootId().equals("XXXX");
+                })
+                .expectComplete()
                 .verify();
+
     }
 
-    private Flux<DomainEvent> history() {
-        return Flux.just(
-                new TableroCreado( TableroId.of("111"),
-                        Set.of(JugadorId.of("333"),JugadorId.of("222"))
-                ),
-                new RondaCreada(
-                        new Ronda(1,
-                                Set.of(JugadorId.of("222"),
-                                        JugadorId.of("123"))),30)
-        );
+    private Flux<DomainEvent> juegoCreado() {
+        var event = new JuegoCreado(JugadorId.of("FFFF"));
+        event.setAggregateRootId("XXXX");
 
+        var event2 = new TableroCreado(TableroId.of("LLLL"),
+                Set.of(
+                        JugadorId.of("FFFF"),
+                        JugadorId.of("GGGG"),
+                        JugadorId.of("HHHH")
+                )
+        );
+        event2.setAggregateRootId("XXXX");
+
+        var event3 = new RondaCreada(
+                new Ronda(1,
+                        Set.of(JugadorId.of("FFFF"),
+                                JugadorId.of("GGGG"),
+                                JugadorId.of("HHHH")
+                        )
+                ),80);
+        event3.setAggregateRootId("XXXX");
+
+        return Flux.just(event, event2, event3);
     }
 }

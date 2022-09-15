@@ -103,5 +103,4 @@ public class TableroViewModel {
             this.numero = numero;
         }
     }
-
 }

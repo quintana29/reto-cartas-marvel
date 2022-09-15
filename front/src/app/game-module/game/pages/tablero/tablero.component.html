@@ -5,23 +5,33 @@
     <button  mat-flat-button color="primary" type="button"(click)="btnLogout()">Cerrar sesión</button>
   </div>
 </nav>
+<div class="containerPrincipal">
+
 <div class="wrapper">
   <div class="one">
-    <h3>Ronda #2</h3>
-    <h3>Jugadores 4/4</h3>
-    <h4>Tiempo: 50s </h4>
-    <button type="button" class="btn btn-info">Iniciar</button>
+    <h3 m-5>Ronda {{numeroRonda}}</h3>
+    <h3>Jugadores {{jugadoresRonda}}</h3>
+    <h4>Tiempo: {{tiempo}} </h4>
+    <button type="button" (click) = "iniciarRonda()" class="btn btn-info btnIniciar">Iniciar</button>
   </div>
 
   <div class="three">
+    <div class="card" *ngFor="let card of cartasDelTablero">  
+      <img  src="{{card.url}}" />
+      Poder {{card.poder}}
+
+  </div>  
 
   </div>
 
   <div class="mazo">
-    <div class="card">  
-    </div>
-    <div class="card">  
-    </div>
-    
+    <div class="card" *ngFor="let card of cartasDelJugador">  
+        <img  src="{{card.url}}" />
+        Poder {{card.poder}}
+        <button mat-button (click)="moverCarta(card.cartaId)" class = "btn btn-primary" color="primary">PONER</button>
+ 
+    </div>  
   </div>
 </div>
+</div>
+ 
