@@ -65,7 +65,17 @@ public class CommandHandle {
                         .onErrorResume(errorHandler::badRequest)
         );
     }
+    @Bean
+    public RouterFunction<ServerResponse> quitar(QuitarCartaEnTableroUseCase usecase) {
+        return route(
+                POST("/juego/quitar").and(accept(MediaType.APPLICATION_JSON)),
+                request -> usecase.andThen(integrationHandle)
+                        .apply(request.bodyToMono(QuitarCartaEnTablero.class))
+                        .then(ServerResponse.ok().build())
+                        .onErrorResume(errorHandler::badRequest)
 
+        );
+    }
 
     @Bean
     public RouterFunction<ServerResponse> crearRonda(CrearRondaUseCase usecase) {

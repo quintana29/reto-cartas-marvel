@@ -2,12 +2,14 @@
 .card {
   width: 190px;
   height: 254px;
-  border-radius: 30px;
+  border-radius: 20px;
   background: #e0e0e0;
-  box-shadow: 15px 15px 30px #bebebe,
-              -15px -15px 30px #ffffff;
+  box-shadow: 15px 15px 30px #bebebe;
   margin-top: 3%;
   margin: 9px;
+  text-align: center;
+  font-size: 12px;
+  padding: 3px;
  
  }
  .contenedor{
@@ -16,3 +18,6 @@
   flex-wrap: wrap;
 
  }
+ .navbar{
+  background-color: rgb(14, 15, 80)!important;
+}

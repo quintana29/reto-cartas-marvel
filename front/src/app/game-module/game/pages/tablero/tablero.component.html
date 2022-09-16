@@ -12,14 +12,14 @@
     <h3 m-5>Ronda {{numeroRonda}}</h3>
     <h3>Jugadores {{jugadoresRonda}}</h3>
     <h4>Tiempo: {{tiempo}} </h4>
-    <button type="button" (click) = "iniciarRonda()" class="btn btn-info btnIniciar">Iniciar</button>
+    <button type="button" (click)="iniciarRonda()" class="btn btn-info btnIniciar">Iniciar</button>
   </div>
 
   <div class="three">
     <div class="card" *ngFor="let card of cartasDelTablero">  
-      <img  src="{{card.url}}" />
+      <img  src="/src/assets/img/Avengers.png" />
       Poder {{card.poder}}
-
+      <button (click)="retirar(card.cartaId)" class="btn btn-primary">Retirar</button>
   </div>  
 
   </div>

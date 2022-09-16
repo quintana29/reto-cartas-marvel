@@ -7,8 +7,8 @@
 </nav>
 
 <div class="contenedor">
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let juego of dataSource">
+ 
+    <div class="card" *ngFor="let juego of dataSource">
       <span>Id Del Juego:  {{juego.id}}</span><br>
       <span>Estado del Juego:   {{juego.iniciado}}</span><br>
       <span>Cantidad de Jugadores: {{juego.cantidadJugadores}}</span><br>
@@ -20,8 +20,8 @@
       <ng-container *ngIf="juego.iniciado">
         <button (click)="entrar(juego.id)" mat-flat-button color="primary">Entrar</button>
       </ng-container>
-    </li>
-  </ul>
+    </div>
+
 </div>
  
   

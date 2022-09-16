@@ -98,6 +98,13 @@ export class TableroComponent implements OnInit {
               this.cartasDelJugador=this.cartasDelJugador;
               this.roundStarted = false;
             }
+            if(event.type === 'cardgame.cartaquitadadeltablero') {
+              console.log("entro")
+              let carta: Carta[]
+              carta = this.cartasDelTablero.filter(carta => carta.cartaId === event.cartaId)
+              this.cartasDelJugador.push(carta[0])
+              this.cartasDelTablero = this.cartasDelTablero.filter(cartas => cartas.cartaId !== event.cartaId) 
+            }
             if (event.type === 'cardgame.juegofinalizado') {
               this.ganadorRondaId=event.alias;
             alert("Ganador del Juego: "+this.ganadorRondaId)
@@ -119,6 +126,7 @@ export class TableroComponent implements OnInit {
       } 
 
       moverCarta(cardId:string){
+        
         this.juego$.ponerCartaEnTablero({
           juegoId:this.juegoId,
           cartaId:cardId,
@@ -128,6 +136,18 @@ export class TableroComponent implements OnInit {
       }
       limpiarTablero(){
         this.cartasDelTablero.length-=this.cartasDelTablero.length;
+      }
+      retirar(cartaId: string){
+        console.log("jugadorId", this.uid);
+        console.log("JUegoId",this.juegoId);
+        console.log("cardId", cartaId);
+        console.log("AAAA")
+        this.juego$.quitarCarta({
+          cartaId: cartaId,
+          juegoId: this.juegoId,
+          jugadorId: this.uid
+        }  
+        ).subscribe(e=>console.log(e));
       }
 
   btnLogout(): void{

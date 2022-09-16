@@ -22,7 +22,7 @@ public class DeterminarGanadorEventHandle {
         this.handle = handle;
     }
 
-    @Async
+    //@Async
     @EventListener
     public void handleIniciarCuentaRegresiva(RondaTerminada event) {
         handle.apply(usecase.apply(Mono.just(event))).block();

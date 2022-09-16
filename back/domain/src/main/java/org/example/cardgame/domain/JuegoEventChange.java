@@ -48,7 +48,8 @@ public class JuegoEventChange extends EventChange {
             if(Boolean.FALSE.equals(juego.tablero.estaHabilitado())){
                 throw new IllegalArgumentException("No se puedo apostar porque el tablero no esta habilitado");
             }
-            juego.tablero.adicionarPartida(event.getJugadorId(), event.getCarta());        });
+            juego.tablero.adicionarPartida(event.getJugadorId(), event.getCarta());
+        });
 
         apply((CartaQuitadaDelTablero event) -> {
             juego.tablero.quitarCarta(event.getJugadorId(), event.getCarta());

@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 import java.util.stream.Collectors;
 
 
-@EnableAsync
+//@EnableAsync
 @Configuration
 public class CrearRondaEventHandle {
 
@@ -28,7 +28,7 @@ public class CrearRondaEventHandle {
         this.handle = handle;
     }
 
-    @Async
+    //@Async
     @EventListener
     public void handleCrearRonda(RondaTerminada event) {
         var command = new CrearRondaCommand();
@@ -39,8 +39,8 @@ public class CrearRondaEventHandle {
         command.setJuegoId(event.aggregateRootId());
         command.setTiempo(15);
         command.setJugadores(jugadores);
-        usecase.andThen(handle).apply(Mono.just(command)).block();
-        //handle.apply(usecase.apply(Mono.just(command))).block();
+        //usecase.andThen(handle).apply(Mono.just(command)).block();
+        handle.apply(usecase.apply(Mono.just(command))).block();
     }
 
 
