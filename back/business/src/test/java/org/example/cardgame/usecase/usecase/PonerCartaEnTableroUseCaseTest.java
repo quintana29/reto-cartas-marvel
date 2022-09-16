@@ -19,7 +19,6 @@ import java.util.Set;
 
 import static org.mockito.Mockito.when;
 
-//TODO: hacer prueba
 @ExtendWith(MockitoExtension.class)
 class PonerCartaEnTableroUseCaseTest {
 
@@ -58,14 +57,14 @@ class PonerCartaEnTableroUseCaseTest {
         var cartas = Set.of(new Carta(
                 CartaMaestraId.of("xxxxx"),
                 20,
-                false, true, "www"
+                false, true, "www.Juan.com"
         ));
         var ronda = new Ronda(1, Set.of(jugadorId, jugador2Id));
         return Flux.just(
                 new JuegoCreado(jugadorId),
-                new JugadorAgregado(jugadorId, "cristian", new Mazo(cartas)),
+                new JugadorAgregado(jugadorId, "raul", new Mazo(cartas)),
                 new TableroCreado(new TableroId(), Set.of(jugadorId, jugador2Id)),
-                new RondaCreada(ronda, 30),
+                new RondaCreada(ronda, 30, "AAA"),
                 new RondaIniciada()
         );
     }

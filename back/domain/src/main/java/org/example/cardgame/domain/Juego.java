@@ -83,8 +83,8 @@ public class Juego extends AggregateEvent<JuegoId> {
      * @param ronda  the ronda
      * @param tiempo the tiempo
      */
-    public void crearRonda(Ronda ronda, Integer tiempo) {
-        appendChange(new RondaCreada(ronda, tiempo)).apply();
+    public void crearRonda(Ronda ronda, Integer tiempo, String juagdorRandon) {
+        appendChange(new RondaCreada(ronda, tiempo, juagdorRandon)).apply();
     }
 
     /**
@@ -118,6 +118,7 @@ public class Juego extends AggregateEvent<JuegoId> {
      */
     public void quitarCartaEnTablero(TableroId tableroId, JugadorId jugadorId, Carta carta) {
         appendChange(new CartaQuitadaDelTablero(tableroId, jugadorId, carta)).apply();
+        appendChange(new CartaAsignadaAJugador(jugadorId, carta)).apply();
     }
 
     /**

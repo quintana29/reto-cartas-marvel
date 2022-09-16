@@ -24,57 +24,40 @@ import java.util.Set;
 import static org.mockito.Mockito.when;
 
 
-//TODO: hacer prueba
 @ExtendWith(MockitoExtension.class)
 class IniciarRondaUseCaseTest {
-    @InjectMocks
-    private IniciarRondaUseCase useCase;
 
     @Mock
     private JuegoDomainEventRepository repository;
+
+    @InjectMocks
+    private IniciarRondaUseCase useCase;
+
     @Test
-    void iniciarRonda(){
-        //ASSERT
+    void iniciarRondaTest(){
         var command = new IniciarRondaCommand();
-        command.setJuegoId("XXXX");
+        command.setJuegoId("AAA");
 
-        when(repository.obtenerEventosPor("XXXX"))
-                .thenReturn(juegoCreado());
+        when(repository.obtenerEventosPor("AAA")).thenReturn(history());
 
-        //ACT & ASSERT
-        StepVerifier
-                .create(useCase.apply(Mono.just(command)))
-                .expectNextMatches(domainEvent -> {
+        StepVerifier.create(useCase.apply(Mono.just(command)))
+                .expectNextMatches( domainEvent -> {
                     var event = (RondaIniciada) domainEvent;
-                    return event.aggregateRootId().equals("XXXX");
-                })
-                .expectComplete()
+                    return "AAA".equals(event.aggregateRootId());
+                }).expectComplete()
                 .verify();
-
     }
 
-    private Flux<DomainEvent> juegoCreado() {
-        var event = new JuegoCreado(JugadorId.of("FFFF"));
-        event.setAggregateRootId("XXXX");
-
-        var event2 = new TableroCreado(TableroId.of("LLLL"),
-                Set.of(
-                        JugadorId.of("FFFF"),
-                        JugadorId.of("GGGG"),
-                        JugadorId.of("HHHH")
-                )
+    private Flux<DomainEvent> history() {
+        return Flux.just(
+                new TableroCreado( TableroId.of("111"),
+                        Set.of(JugadorId.of("333"),JugadorId.of("222"))
+                ),
+                new RondaCreada(
+                        new Ronda(1,
+                                Set.of(JugadorId.of("222"),
+                                        JugadorId.of("123"))),30, "222")
         );
-        event2.setAggregateRootId("XXXX");
 
-        var event3 = new RondaCreada(
-                new Ronda(1,
-                        Set.of(JugadorId.of("FFFF"),
-                                JugadorId.of("GGGG"),
-                                JugadorId.of("HHHH")
-                        )
-                ),80);
-        event3.setAggregateRootId("XXXX");
-
-        return Flux.just(event, event2, event3);
     }
 }

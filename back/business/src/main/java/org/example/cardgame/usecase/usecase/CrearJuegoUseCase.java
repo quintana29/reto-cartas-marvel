@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
 
     private Mazo generarMazo(List<CartaMaestra> cartas) {
         Collections.shuffle(cartas);
-        var lista = cartas.stream().limit(3)
+        var lista = cartas.stream().limit(5)
                 .map(carta -> new Carta(CartaMaestraId.of(carta.getId()), carta.getPoder(), false, true, carta.getUri()))
                 .collect(Collectors.toList());
         cartas.removeIf(cartaMaestra -> lista.stream().anyMatch(carta -> {

@@ -12,6 +12,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -39,8 +42,17 @@ public class CrearRondaEventHandle {
         command.setJuegoId(event.aggregateRootId());
         command.setTiempo(15);
         command.setJugadores(jugadores);
+
+        var idJugadorElegido=elegirAleatorio(jugadores);
+        command.setJugadorRandon(idJugadorElegido);
         //usecase.andThen(handle).apply(Mono.just(command)).block();
         handle.apply(usecase.apply(Mono.just(command))).block();
+    }
+    private String elegirAleatorio(Set<String> jugadores){
+        Collections.shuffle( Arrays.asList(jugadores.toArray()));
+        var jugadorId = jugadores.stream().findFirst().get();
+        return jugadorId;
+
     }
 
 

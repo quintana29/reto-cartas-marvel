@@ -32,17 +32,11 @@ public class QuitarCartaEnTableroUseCase extends UseCaseForCommand<QuitarCartaEn
                     Set<Carta> cartasEnTablero = new HashSet<>();
                     juego.tablero().partida().forEach((jugador, cartas) -> {
                         cartas.stream()
-                                .map(c -> c.value().poder())
-                                .reduce(Integer::sum)
-                                .ifPresent(puntos -> {
-                                    cartasEnTablero.addAll(cartas);
-                                });
-
+                                .map(carta ->  cartasEnTablero.add(carta));
                     });
-                    //var cartasDelJugador = juego.jugadores().get(jugadorId).mazo().value().cartas();
                     var cartaSeleccionada = seleccionarCarta(command.getCartaId(), cartasEnTablero);
 
-
+                    juego.tablero().quitarCarta(jugadorId,cartaSeleccionada);
                     juego.quitarCartaEnTablero(tableroId, jugadorId, cartaSeleccionada);
                     return juego.getUncommittedChanges();
                 }));

@@ -22,25 +22,21 @@ import java.util.Set;
 
 import static org.mockito.Mockito.when;
 
-
-//TODO: hacer prueba
 @ExtendWith(MockitoExtension.class)
 class IniciarJuegoUseCaseTest {
-
-    @Mock
-    private JuegoDomainEventRepository repository;
     @InjectMocks
     private IniciarJuegoUseCase useCase;
 
+    @Mock
+    private JuegoDomainEventRepository repository;
+
     @Test
-    void iniciarJuego() {
+    void iniciarJuego(){
 
-        //ARRANGE
         var command = new IniciarJuegoCommand();
-        command.setJuegoId("juegoId01");
+        command.setJuegoId("Juego01");
 
-        //ASSERT & ACT
-        when(repository.obtenerEventosPor("juegoId01"))
+        when(repository.obtenerEventosPor("Juego01"))
                 .thenReturn(juegoCreado());
 
 
@@ -48,17 +44,20 @@ class IniciarJuegoUseCaseTest {
                 .create(useCase.apply(Mono.just(command)))
                 .expectNextMatches(domainEvent -> {
                     var event = (TableroCreado) domainEvent;
-                    return event.aggregateRootId().equals("juegoId01");
+                    return event.aggregateRootId().equals("Juego01");
                 })
                 .expectComplete()
                 .verify();
     }
 
     private Flux<DomainEvent> juegoCreado() {
-        var event = new JuegoCreado(JugadorId.of("Jugador01"));
-        event.setAggregateRootId("juegoId01");
+        return Flux.just(
+                new JuegoCreado(JugadorId.of("XXX")),
+                new TableroCreado( TableroId.of("111"),
+                        Set.of(JugadorId.of("111"),JugadorId.of("222"))
 
-        return Flux.just(event);
+                )
+        );
+
     }
-
 }

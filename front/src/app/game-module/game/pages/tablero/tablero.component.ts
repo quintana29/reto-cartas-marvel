@@ -6,6 +6,7 @@ import { Carta } from '../../models/tablero.model';
 import { JuegoService } from '../../services/juego.service.service';
 import { WebSocketService } from '../../services/webSocket.service';
 import firebase from 'firebase/compat';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tablero',
@@ -100,17 +101,15 @@ export class TableroComponent implements OnInit {
             }
             if(event.type === 'cardgame.cartaquitadadeltablero') {
               console.log("entro")
-              let carta: Carta[]
-              carta = this.cartasDelTablero.filter(carta => carta.cartaId === event.cartaId)
-              this.cartasDelJugador.push(carta[0])
-              this.cartasDelTablero = this.cartasDelTablero.filter(cartas => cartas.cartaId !== event.cartaId) 
+             
             }
             if (event.type === 'cardgame.juegofinalizado') {
               this.ganadorRondaId=event.alias;
-            alert("Ganador del Juego: "+this.ganadorRondaId)
-            setTimeout(() => { 
-              this.router.navigate(['/home']);
-            },300);
+              Swal.fire("ganador del juego", event.alias)
+              alert("Ganador del Juego: " + this.ganadorRondaId)
+              setTimeout(() => {
+                this.router.navigate(['/home']);
+              }, 300);
             }      
           }
       })
@@ -138,10 +137,14 @@ export class TableroComponent implements OnInit {
         this.cartasDelTablero.length-=this.cartasDelTablero.length;
       }
       retirar(cartaId: string){
-        console.log("jugadorId", this.uid);
-        console.log("JUegoId",this.juegoId);
-        console.log("cardId", cartaId);
-        console.log("AAAA")
+       
+       /*let carta: Carta[]
+        carta = this.cartasDelTablero.filter(carta => carta.cartaId === cartaId)
+        this.cartasDelJugador.push(carta[0])
+        this.cartasDelTablero = this.cartasDelTablero.filter(cartas => cartas.cartaId !== cartaId)
+        this.limpiarTablero();*/
+
+        this.cartasDelJugador.push()
         this.juego$.quitarCarta({
           cartaId: cartaId,
           juegoId: this.juegoId,

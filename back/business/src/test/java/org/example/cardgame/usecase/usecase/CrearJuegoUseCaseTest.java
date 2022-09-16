@@ -5,6 +5,7 @@ import org.example.cardgame.domain.events.JuegoCreado;
 import org.example.cardgame.domain.events.JugadorAgregado;
 import org.example.cardgame.usecase.gateway.ListaDeCartaService;
 import org.example.cardgame.usecase.gateway.model.CartaMaestra;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 
 import static org.mockito.Mockito.when;
 
-//TODO: hacer prueba
+
 @ExtendWith(MockitoExtension.class)
 class CrearJuegoUseCaseTest {
 
@@ -36,7 +37,7 @@ class CrearJuegoUseCaseTest {
         command.getJugadores().put("HHHH", "roberto");
         command.setJugadorPrincipalId("FFFF");
 
-        //¿Qué es lo que espera?
+
         when(service.obtenerCartasDeMarvel()).thenReturn(CartasSet());
 
         StepVerifier.create(useCase.apply(Mono.just(command)))

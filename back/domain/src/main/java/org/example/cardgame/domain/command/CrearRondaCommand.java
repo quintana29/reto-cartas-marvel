@@ -11,7 +11,15 @@ public class CrearRondaCommand extends Command {
     private String juegoId;
     private Integer tiempo;
     private Set<String> jugadores;
+     private String jugadorRandon;
 
+    public String getJugadorRandon() {
+        return jugadorRandon;
+    }
+
+    public void setJugadorRandon(String jugadorRandon) {
+        this.jugadorRandon = jugadorRandon;
+    }
 
     /**
      * Gets jugadores.
