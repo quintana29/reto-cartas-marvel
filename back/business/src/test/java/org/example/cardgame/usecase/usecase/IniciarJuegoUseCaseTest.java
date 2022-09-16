@@ -24,40 +24,36 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class IniciarJuegoUseCaseTest {
-    @InjectMocks
-    private IniciarJuegoUseCase useCase;
 
     @Mock
     private JuegoDomainEventRepository repository;
 
+    @InjectMocks
+    private IniciarJuegoUseCase useCase;
+
     @Test
     void iniciarJuego(){
-
         var command = new IniciarJuegoCommand();
-        command.setJuegoId("Juego01");
+        command.setJuegoId("QQQ");
 
-        when(repository.obtenerEventosPor("Juego01"))
-                .thenReturn(juegoCreado());
+        when(repository.obtenerEventosPor("QQQ")).thenReturn(crearJuego());
 
-
-        StepVerifier
-                .create(useCase.apply(Mono.just(command)))
+        StepVerifier.create(useCase.apply(Mono.just(command)))
                 .expectNextMatches(domainEvent -> {
                     var event = (TableroCreado) domainEvent;
-                    return event.aggregateRootId().equals("Juego01");
+                    return event.aggregateRootId().equals("QQQ");
+                }).expectNextMatches(domainEvent -> {
+                    var event2 = (RondaCreada) domainEvent;
+                    return event2.aggregateRootId().equals("QQQ");
                 })
                 .expectComplete()
                 .verify();
     }
 
-    private Flux<DomainEvent> juegoCreado() {
-        return Flux.just(
-                new JuegoCreado(JugadorId.of("XXX")),
-                new TableroCreado( TableroId.of("111"),
-                        Set.of(JugadorId.of("111"),JugadorId.of("222"))
+    private Flux<DomainEvent> crearJuego() {
+        var event = new JuegoCreado(JugadorId.of("QQQ"));
+        event.setAggregateRootId("QQQ");
 
-                )
-        );
-
+        return Flux.just(event);
     }
 }
