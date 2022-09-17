@@ -5,3 +5,6 @@
 
 ## construido con 
 Java / DDD / Intellij / Sofka
+
+## Enlace video
+[https://youtu.be/H3HN0eDatZk]
